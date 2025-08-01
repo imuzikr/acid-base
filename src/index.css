@@ -103,3 +103,29 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .hover-scale {
+    @apply transition-transform duration-200 hover:scale-105 cursor-pointer;
+  }
+  
+  .interactive-card {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer;
+  }
+  
+  .color-indicator {
+    @apply w-8 h-8 rounded-full border-2 border-white shadow-lg transition-all duration-500;
+  }
+  
+  .beaker-animation {
+    @apply relative overflow-hidden;
+  }
+  
+  .ion-particle {
+    @apply absolute w-2 h-2 rounded-full opacity-70;
+  }
+  
+  .temperature-bar {
+    @apply transition-all duration-1000 ease-in-out;
+  }
+}
