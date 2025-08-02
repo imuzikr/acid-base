@@ -152,56 +152,56 @@ const Index = () => {
           {/* 산과 염기의 성질 */}
           <TabsContent value="properties">
             <div className="grid md:grid-cols-2 gap-6">
-              <Card className="interactive-card animate-fade-in">
+              <Card className="interactive-card animate-fade-in overflow-hidden">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <TestTube className="h-5 w-5 text-red-500 animate-bounce-gentle" />
                     산(Acid)의 성질
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-4 overflow-hidden">
                   <div className="space-y-2 hover-scale p-2 rounded">
                     <Badge variant="destructive" className="animate-glow">신맛</Badge>
-                    <p>레몬, 식초와 같은 신맛을 가집니다.</p>
+                    <p className="break-words">레몬, 식초와 같은 신맛을 가집니다.</p>
                   </div>
                   <div className="space-y-2 hover-scale p-2 rounded">
                     <Badge variant="destructive">리트머스 시험지</Badge>
-                    <p>파란색 리트머스 시험지를 빨간색으로 변화시킵니다.</p>
+                    <p className="break-words">파란색 리트머스 시험지를 빨간색으로 변화시킵니다.</p>
                   </div>
                   <div className="space-y-2 hover-scale p-2 rounded">
                     <Badge variant="destructive">금속과 반응</Badge>
-                    <p>아연, 철 등과 반응하여 수소 기체를 발생시킵니다.</p>
+                    <p className="break-words">아연, 철 등과 반응하여 수소 기체를 발생시킵니다.</p>
                   </div>
                   <div className="space-y-2 hover-scale p-2 rounded">
                     <Badge variant="destructive">부식성</Badge>
-                    <p>농도가 진할 때 금속이나 피부를 부식시킵니다.</p>
+                    <p className="break-words">농도가 진할 때 금속이나 피부를 부식시킵니다.</p>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card className="interactive-card animate-fade-in" style={{animationDelay: '0.2s'}}>
+              <Card className="interactive-card animate-fade-in overflow-hidden" style={{animationDelay: '0.2s'}}>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <TestTube className="h-5 w-5 text-blue-500 animate-bounce-gentle" style={{animationDelay: '0.5s'}} />
                     염기(Base)의 성질
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-4 overflow-hidden">
                   <div className="space-y-2 hover-scale p-2 rounded">
                     <Badge variant="secondary">쓴맛</Badge>
-                    <p>쓴맛을 가지며, 미끄러운 느낌이 납니다.</p>
+                    <p className="break-words">쓴맛을 가지며, 미끄러운 느낌이 납니다.</p>
                   </div>
                   <div className="space-y-2 hover-scale p-2 rounded">
                     <Badge variant="secondary">리트머스 시험지</Badge>
-                    <p>빨간색 리트머스 시험지를 파란색으로 변화시킵니다.</p>
+                    <p className="break-words">빨간색 리트머스 시험지를 파란색으로 변화시킵니다.</p>
                   </div>
                   <div className="space-y-2 hover-scale p-2 rounded">
                     <Badge variant="secondary">단백질 분해</Badge>
-                    <p>단백질을 분해하는 성질이 있습니다.</p>
+                    <p className="break-words">단백질을 분해하는 성질이 있습니다.</p>
                   </div>
                   <div className="space-y-2 hover-scale p-2 rounded">
                     <Badge variant="secondary">부식성</Badge>
-                    <p>강염기는 피부나 옷을 손상시킬 수 있습니다.</p>
+                    <p className="break-words">강염기는 피부나 옷을 손상시킬 수 있습니다.</p>
                   </div>
                 </CardContent>
               </Card>
@@ -210,45 +210,51 @@ const Index = () => {
 
           {/* 아레니우스 정의 */}
           <TabsContent value="definition">
-            <Card className="animate-fade-in">
+            <Card className="animate-fade-in overflow-hidden">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <BookOpen className="h-5 w-5 animate-bounce-gentle" />
                   아레니우스의 산-염기 정의
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="break-words">
                   스웨덴의 화학자 아레니우스(Arrhenius)가 제시한 정의
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-6">
+              <CardContent className="space-y-6 overflow-hidden">
                 <div className="grid md:grid-cols-2 gap-6">
-                  <div className="p-6 border-2 border-red-200 rounded-lg bg-red-50 interactive-card animate-fade-in">
+                  <div className="p-6 border-2 border-red-200 rounded-lg bg-red-50 interactive-card animate-fade-in overflow-hidden">
                     <h3 className="text-xl font-bold mb-3 text-red-700">산 (Acid)</h3>
-                    <p className="text-lg mb-4">수용액에서 <strong className="animate-pulse">수소 이온(H⁺)</strong>을 내놓는 물질</p>
+                    <p className="text-lg mb-4 break-words">수용액에서 <strong className="animate-pulse">수소 이온(H⁺)</strong>을 내놓는 물질</p>
                     <div className="space-y-2">
-                      <p className="font-mono text-sm bg-white p-2 rounded">HCl → H⁺ + Cl⁻</p>
-                      <p className="font-mono text-sm bg-white p-2 rounded">HNO₃ → H⁺ + NO₃⁻</p>
-                      <p className="font-mono text-sm bg-white p-2 rounded">H₂SO₄ → 2H⁺ + SO₄²⁻</p>
+                      <p className="font-mono text-sm bg-white p-2 rounded break-words">HCl → H⁺ + Cl⁻</p>
+                      <p className="font-mono text-sm bg-white p-2 rounded break-words">HNO₃ → H⁺ + NO₃⁻</p>
+                      <p className="font-mono text-sm bg-white p-2 rounded break-words">H₂SO₄ → 2H⁺ + SO₄²⁻</p>
                     </div>
                   </div>
                   
-                  <div className="p-6 border-2 border-blue-200 rounded-lg bg-blue-50 interactive-card animate-fade-in" style={{animationDelay: '0.2s'}}>
+                  <div className="p-6 border-2 border-blue-200 rounded-lg bg-blue-50 interactive-card animate-fade-in overflow-hidden" style={{animationDelay: '0.2s'}}>
                     <h3 className="text-xl font-bold mb-3 text-blue-700">염기 (Base)</h3>
-                    <p className="text-lg mb-4">수용액에서 <strong className="animate-pulse">수산화 이온(OH⁻)</strong>을 내놓는 물질</p>
+                    <p className="text-lg mb-4 break-words">수용액에서 <strong className="animate-pulse">수산화 이온(OH⁻)</strong>을 내놓는 물질</p>
                     <div className="space-y-2">
-                      <p className="font-mono text-sm bg-white p-2 rounded">NaOH → Na⁺ + OH⁻</p>
-                      <p className="font-mono text-sm bg-white p-2 rounded">KOH → K⁺ + OH⁻</p>
-                      <p className="font-mono text-sm bg-white p-2 rounded">Ca(OH)₂ → Ca²⁺ + 2OH⁻</p>
+                      <p className="font-mono text-sm bg-white p-2 rounded break-words">NaOH → Na⁺ + OH⁻</p>
+                      <p className="font-mono text-sm bg-white p-2 rounded break-words">KOH → K⁺ + OH⁻</p>
+                      <p className="font-mono text-sm bg-white p-2 rounded break-words">Ca(OH)₂ → Ca²⁺ + 2OH⁻</p>
                     </div>
                   </div>
                 </div>
                 
                 <div className="p-4 bg-muted rounded-lg animate-fade-in overflow-hidden" style={{animationDelay: '0.4s'}}>
                   <h4 className="font-bold mb-2">💡 핵심 포인트</h4>
-                  <ul className="list-disc list-inside space-y-1">
-                    <li className="hover-scale break-words">산: H⁺ 이온을 내놓음 (수소 공여체)</li>
-                    <li className="hover-scale break-words">염기: OH⁻ 이온을 내놓음 (수소 받개체)</li>
-                    <li className="hover-scale break-words">물의 존재가 필수적 (수용액에서만 정의)</li>
+                  <ul className="list-disc space-y-1 pl-6">
+                    <li className="hover-scale break-words">
+                      <span className="flex-shrink-0">산: H⁺ 이온을 내놓음 (수소 공여체)</span>
+                    </li>
+                    <li className="hover-scale break-words">
+                      <span className="flex-shrink-0">염기: OH⁻ 이온을 내놓음 (수소 받개체)</span>
+                    </li>
+                    <li className="hover-scale break-words">
+                      <span className="flex-shrink-0">물의 존재가 필수적 (수용액에서만 정의)</span>
+                    </li>
                   </ul>
                 </div>
               </CardContent>
@@ -621,16 +627,28 @@ const Index = () => {
                   </div>
                 </div>
 
-                <div className="p-4 bg-muted rounded-lg animate-fade-in">
+                <div className="p-4 bg-muted rounded-lg animate-fade-in overflow-hidden">
                   <h4 className="font-bold mb-3">📊 중화반응의 특징</h4>
                   <div className="grid md:grid-cols-2 gap-4 text-sm">
-                    <div>
-                      <p className="hover-scale"><strong>• 전기전도도:</strong> 중화점에서 최소가 됩니다</p>
-                      <p className="hover-scale"><strong>• pH 변화:</strong> 급격한 변화 구간이 있습니다</p>
+                    <div className="space-y-2">
+                      <div className="flex items-start gap-2">
+                        <span className="flex-shrink-0">•</span>
+                        <span className="hover-scale break-words"><strong>전기전도도:</strong> 중화점에서 최소가 됩니다</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <span className="flex-shrink-0">•</span>
+                        <span className="hover-scale break-words"><strong>pH 변화:</strong> 급격한 변화 구간이 있습니다</span>
+                      </div>
                     </div>
-                    <div>
-                      <p className="hover-scale"><strong>• 열 발생:</strong> 발열반응으로 온도가 상승합니다</p>
-                      <p className="hover-scale"><strong>• 지시약:</strong> 중화점에서 색이 변합니다</p>
+                    <div className="space-y-2">
+                      <div className="flex items-start gap-2">
+                        <span className="flex-shrink-0">•</span>
+                        <span className="hover-scale break-words"><strong>열 발생:</strong> 발열반응으로 온도가 상승합니다</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <span className="flex-shrink-0">•</span>
+                        <span className="hover-scale break-words"><strong>지시약:</strong> 중화점에서 색이 변합니다</span>
+                      </div>
                     </div>
                   </div>
                 </div>
