@@ -17,6 +17,8 @@ const Index = () => {
   const [neutralizationStep, setNeutralizationStep] = useState(0);
   const [temperatureValue, setTemperatureValue] = useState(25);
   const [showIons, setShowIons] = useState(false);
+  const [ionizationAnimation, setIonizationAnimation] = useState<string>("");
+  const [showIonization, setShowIonization] = useState(false);
 
   const quizQuestions = [
     {
@@ -85,6 +87,15 @@ const Index = () => {
     setShowIons(!showIons);
   };
 
+  const startIonizationAnimation = (type: string) => {
+    setIonizationAnimation(type);
+    setShowIonization(true);
+    setTimeout(() => {
+      setShowIonization(false);
+      setIonizationAnimation("");
+    }, 3000);
+  };
+
   const getIndicatorColor = (indicator: string, solution: string) => {
     const colors = {
       litmus: {
@@ -120,6 +131,98 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-muted">
+      {/* 추가 CSS 스타일 */}
+      <style jsx>{`
+        .bullet-list {
+          list-style: none;
+          padding-left: 0;
+        }
+        .bullet-list li {
+          position: relative;
+          padding-left: 1.5rem;
+          margin-bottom: 0.5rem;
+        }
+        .bullet-list li::before {
+          content: "•";
+          position: absolute;
+          left: 0;
+          top: 0;
+          color: hsl(var(--primary));
+          font-weight: bold;
+          user-select: none;
+          pointer-events: none;
+        }
+        .ion-particle {
+          position: absolute;
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          z-index: 10;
+        }
+        .beaker-animation {
+          position: relative;
+          border: 2px solid #ccc;
+          border-radius: 0 0 20px 20px;
+          background: rgba(255, 255, 255, 0.1);
+        }
+        .color-indicator {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          border: 2px solid white;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .hover-scale:hover {
+          transform: scale(1.02);
+        }
+        .interactive-card:hover {
+          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+          transform: translateY(-2px);
+        }
+        .temperature-bar {
+          transition: height 1s ease-in-out;
+        }
+        .ionization-container {
+          position: relative;
+          height: 120px;
+          overflow: hidden;
+        }
+        .molecule {
+          position: absolute;
+          background: #8B5CF6;
+          border-radius: 8px;
+          padding: 4px 8px;
+          color: white;
+          font-size: 14px;
+          font-weight: bold;
+          transition: all 0.8s ease-in-out;
+        }
+        .ion-positive {
+          background: #EF4444;
+          border-radius: 50%;
+          width: 30px;
+          height: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          font-size: 12px;
+          font-weight: bold;
+        }
+        .ion-negative {
+          background: #3B82F6;
+          border-radius: 50%;
+          width: 30px;
+          height: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          font-size: 12px;
+          font-weight: bold;
+        }
+      `}</style>
+
       {/* Header */}
       <div className="bg-primary text-primary-foreground py-8 relative overflow-hidden">
         {/* 배경 애니메이션 요소들 */}
@@ -219,8 +322,92 @@ const Index = () => {
                 <CardDescription className="break-words">
                   스웨덴의 화학자 아레니우스(Arrhenius)가 제시한 정의
                 </CardDescription>
+                <div className="flex flex-wrap gap-2 mt-4">
+                  <Button 
+                    onClick={() => startIonizationAnimation('acid')} 
+                    variant="outline" 
+                    size="sm"
+                    className="text-red-600 border-red-300"
+                  >
+                    <Play className="h-4 w-4 mr-1" />
+                    산 이온화 보기
+                  </Button>
+                  <Button 
+                    onClick={() => startIonizationAnimation('base')} 
+                    variant="outline" 
+                    size="sm"
+                    className="text-blue-600 border-blue-300"
+                  >
+                    <Play className="h-4 w-4 mr-1" />
+                    염기 이온화 보기
+                  </Button>
+                </div>
               </CardHeader>
               <CardContent className="space-y-6 overflow-hidden">
+                {/* 이온화 애니메이션 영역 */}
+                {showIonization && (
+                  <div className="p-6 bg-gradient-to-r from-purple-50 to-indigo-50 rounded-lg border animate-scale-in overflow-hidden">
+                    <h4 className="font-bold mb-4 text-center break-words">
+                      🧪 {ionizationAnimation === 'acid' ? '산의 이온화' : '염기의 이온화'} 과정
+                    </h4>
+                    <div className="ionization-container bg-white rounded-lg border-2 border-dashed border-gray-300">
+                      {ionizationAnimation === 'acid' && (
+                        <>
+                          <div className="molecule" style={{
+                            left: showIonization ? '10%' : '45%',
+                            top: '45px',
+                            opacity: showIonization ? 0 : 1
+                          }}>
+                            HCl
+                          </div>
+                          <div className="ion-positive" style={{
+                            left: showIonization ? '20%' : '45%',
+                            top: '20px',
+                            opacity: showIonization ? 1 : 0
+                          }}>
+                            H⁺
+                          </div>
+                          <div className="ion-negative" style={{
+                            left: showIonization ? '70%' : '45%',
+                            top: '70px',
+                            opacity: showIonization ? 1 : 0
+                          }}>
+                            Cl⁻
+                          </div>
+                        </>
+                      )}
+                      {ionizationAnimation === 'base' && (
+                        <>
+                          <div className="molecule" style={{
+                            left: showIonization ? '10%' : '45%',
+                            top: '45px',
+                            opacity: showIonization ? 0 : 1
+                          }}>
+                            NaOH
+                          </div>
+                          <div className="ion-positive" style={{
+                            left: showIonization ? '20%' : '45%',
+                            top: '20px',
+                            opacity: showIonization ? 1 : 0
+                          }}>
+                            Na⁺
+                          </div>
+                          <div className="ion-negative" style={{
+                            left: showIonization ? '70%' : '45%',
+                            top: '70px',
+                            opacity: showIonization ? 1 : 0
+                          }}>
+                            OH⁻
+                          </div>
+                        </>
+                      )}
+                      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-xs text-gray-500">
+                        수용액에서 이온화
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="p-6 border-2 border-red-200 rounded-lg bg-red-50 interactive-card animate-fade-in overflow-hidden">
                     <h3 className="text-xl font-bold mb-3 text-red-700">산 (Acid)</h3>
@@ -245,19 +432,10 @@ const Index = () => {
                 
                 <div className="p-4 bg-muted rounded-lg animate-fade-in overflow-hidden" style={{animationDelay: '0.4s'}}>
                   <h4 className="font-bold mb-2">💡 핵심 포인트</h4>
-                  <ul className="space-y-1">
-                    <li className="hover-scale flex items-start gap-2">
-                      <span className="flex-shrink-0">•</span>
-                      <span className="break-words">산: H⁺ 이온을 내놓음 (수소 공여체)</span>
-                    </li>
-                    <li className="hover-scale flex items-start gap-2">
-                      <span className="flex-shrink-0">•</span>
-                      <span className="break-words">염기: OH⁻ 이온을 내놓음 (수소 받개체)</span>
-                    </li>
-                    <li className="hover-scale flex items-start gap-2">
-                      <span className="flex-shrink-0">•</span>
-                      <span className="break-words">물의 존재가 필수적 (수용액에서만 정의)</span>
-                    </li>
+                  <ul className="bullet-list space-y-1">
+                    <li className="break-words">산: H⁺ 이온을 내놓음 (수소 공여체)</li>
+                    <li className="break-words">염기: OH⁻ 이온을 내놓음 (수소 받개체)</li>
+                    <li className="break-words">물의 존재가 필수적 (수용액에서만 정의)</li>
                   </ul>
                 </div>
               </CardContent>
@@ -473,23 +651,11 @@ const Index = () => {
 
                 <div className="p-4 bg-muted rounded-lg animate-fade-in overflow-hidden">
                   <h4 className="font-bold mb-2">🧪 실험 시 주의사항</h4>
-                  <ul className="space-y-1 text-sm">
-                    <li className="hover-scale flex items-start gap-2">
-                      <span className="flex-shrink-0">•</span>
-                      <span className="break-words">지시약은 소량만 사용 (2-3방울)</span>
-                    </li>
-                    <li className="hover-scale flex items-start gap-2">
-                      <span className="flex-shrink-0">•</span>
-                      <span className="break-words">지시약을 너무 많이 넣으면 색 변화를 정확히 관찰하기 어려움</span>
-                    </li>
-                    <li className="hover-scale flex items-start gap-2">
-                      <span className="flex-shrink-0">•</span>
-                      <span className="break-words">각 지시약마다 색 변화 pH 범위가 다름</span>
-                    </li>
-                    <li className="hover-scale flex items-start gap-2">
-                      <span className="flex-shrink-0">•</span>
-                      <span className="break-words">실험 후에는 폐액을 따로 수거</span>
-                    </li>
+                  <ul className="bullet-list text-sm space-y-1">
+                    <li className="break-words">지시약은 소량만 사용 (2-3방울)</li>
+                    <li className="break-words">지시약을 너무 많이 넣으면 색 변화를 정확히 관찰하기 어려움</li>
+                    <li className="break-words">각 지시약마다 색 변화 pH 범위가 다름</li>
+                    <li className="break-words">실험 후에는 폐액을 따로 수거</li>
                   </ul>
                 </div>
               </CardContent>
@@ -646,24 +812,16 @@ const Index = () => {
                   <h4 className="font-bold mb-3">📊 중화반응의 특징</h4>
                   <div className="grid md:grid-cols-2 gap-4 text-sm">
                     <div className="space-y-2">
-                      <div className="flex items-start gap-2">
-                        <span className="flex-shrink-0">•</span>
-                        <span className="hover-scale break-words"><strong>전기전도도:</strong> 중화점에서 최소가 됩니다</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <span className="flex-shrink-0">•</span>
-                        <span className="hover-scale break-words"><strong>pH 변화:</strong> 급격한 변화 구간이 있습니다</span>
-                      </div>
+                      <ul className="bullet-list">
+                        <li className="break-words"><strong>전기전도도:</strong> 중화점에서 최소가 됩니다</li>
+                        <li className="break-words"><strong>pH 변화:</strong> 급격한 변화 구간이 있습니다</li>
+                      </ul>
                     </div>
                     <div className="space-y-2">
-                      <div className="flex items-start gap-2">
-                        <span className="flex-shrink-0">•</span>
-                        <span className="hover-scale break-words"><strong>열 발생:</strong> 발열반응으로 온도가 상승합니다</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <span className="flex-shrink-0">•</span>
-                        <span className="hover-scale break-words"><strong>지시약:</strong> 중화점에서 색이 변합니다</span>
-                      </div>
+                      <ul className="bullet-list">
+                        <li className="break-words"><strong>열 발생:</strong> 발열반응으로 온도가 상승합니다</li>
+                        <li className="break-words"><strong>지시약:</strong> 중화점에서 색이 변합니다</li>
+                      </ul>
                     </div>
                   </div>
                 </div>
