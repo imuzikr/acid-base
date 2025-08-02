@@ -243,12 +243,12 @@ const Index = () => {
                   </div>
                 </div>
                 
-                <div className="p-4 bg-muted rounded-lg animate-fade-in" style={{animationDelay: '0.4s'}}>
+                <div className="p-4 bg-muted rounded-lg animate-fade-in overflow-hidden" style={{animationDelay: '0.4s'}}>
                   <h4 className="font-bold mb-2">💡 핵심 포인트</h4>
                   <ul className="list-disc list-inside space-y-1">
-                    <li className="hover-scale">산: H⁺ 이온을 내놓음 (수소 공여체)</li>
-                    <li className="hover-scale">염기: OH⁻ 이온을 내놓음 (수소 받개체)</li>
-                    <li className="hover-scale">물의 존재가 필수적 (수용액에서만 정의)</li>
+                    <li className="hover-scale break-words">산: H⁺ 이온을 내놓음 (수소 공여체)</li>
+                    <li className="hover-scale break-words">염기: OH⁻ 이온을 내놓음 (수소 받개체)</li>
+                    <li className="hover-scale break-words">물의 존재가 필수적 (수용액에서만 정의)</li>
                   </ul>
                 </div>
               </CardContent>
