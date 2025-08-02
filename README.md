@@ -1,4 +1,4 @@
-# Welcome to your Lovable project
+# 통합과학 산과 염기
 
 ## Project info
 
